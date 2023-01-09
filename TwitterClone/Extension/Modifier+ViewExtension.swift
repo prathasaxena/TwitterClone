@@ -21,6 +21,12 @@ struct SmallMetaText : ViewModifier {
     }
 }
 
+struct BoldText : ViewModifier {
+    func body(content : Content) -> some View {
+        content.font(.headline).bold()
+            .foregroundColor(.black)
+    }
+}
 
 extension View {
     func textMeta() -> some View {
@@ -29,6 +35,10 @@ extension View {
     
     func smallTextMeta() -> some View {
         modifier(SmallMetaText())
+    }
+    
+    func boldText() -> some View {
+        modifier(BoldText())
     }
 }
 
