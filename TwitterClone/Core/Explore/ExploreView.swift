@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ExploreView.swift
 //  TwitterClone
 //
 //  Created by Pratha Saxena on 09/01/23.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ExploreView: View {
     var body: some View {
-      MainTabView()
+        Text("Explore")
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct ExploreView_Previews: PreviewProvider {
     static var previews: some View {
-        MainTabView()
+        ExploreView()
     }
 }

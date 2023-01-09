@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MessageView.swift
 //  TwitterClone
 //
 //  Created by Pratha Saxena on 09/01/23.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MessageView: View {
     var body: some View {
-      MainTabView()
+        Text("Message")
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
-        MainTabView()
+        MessageView()
     }
 }
