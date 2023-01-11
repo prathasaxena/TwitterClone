@@ -16,9 +16,12 @@ struct ProfileView: View {
                 Color(.blue)
                     .frame(height: 200)
                     .ignoresSafeArea()
+                Image(systemName: "person")
+                    .offset(x: 15, y: -180)
                 Circle()
                     .frame(width: 100, height: 100)
                     .offset(x: 15)
+                
                     
             }
             
@@ -34,7 +37,7 @@ struct ProfileView: View {
                 }
             }
             Spacer()
-        }
+        }.navigationBarHidden(true)
         
     }
 }
@@ -42,8 +45,7 @@ struct ProfileView: View {
 extension ProfileView {
     var profileInfo : some View {
         VStack(alignment: .leading) {
-            Text("pratha saxena").font(.title).bold()
-            Text("@pratha_saxena").textMeta()
+            ProfileInfo()
             
             Text("** Just act normal **").foregroundColor(.black)
                 .padding(.top)
