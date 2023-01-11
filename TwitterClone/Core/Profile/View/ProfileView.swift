@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @State var filterTab : ProfileFilter = .tweets
+    @Namespace var animation
     var body: some View {
         VStack(alignment: .leading){
             ZStack(alignment: .bottomLeading) {
@@ -22,8 +24,15 @@ struct ProfileView: View {
             
             profileInfo
             profileDetails
+            ProfileFollowing().padding(.horizontal)
             profileFilterView
-            Divider()
+            ScrollView {
+                LazyVStack {
+                    ForEach(1...10,id: \.self){_ in
+                        TweetView()
+                    }
+                }
+            }
             Spacer()
         }
         
@@ -42,7 +51,7 @@ extension ProfileView {
     }
     
     var profileDetails : some View {
-        HStack {
+        HStack(spacing: 30) {
             HStack {
                 Image(systemName: "mappin").textMeta()
                 Text("Lucknow").textMeta()
@@ -55,17 +64,33 @@ extension ProfileView {
     }
     
     var profileFilterView : some View {
-        HStack {
-            ForEach(ProfileFilter.allCases, id: \.self) { item in
-                Button {
-                    
-                } label: {
-                    Text(item.title).boldText()
-
+        VStack {
+            HStack {
+                ForEach(ProfileFilter.allCases, id: \.self) { item in
+                    VStack {
+                        Button {
+                            withAnimation(.easeInOut){
+                                filterTab = item
+                            }
+                        } label: {
+                            
+                            Text(item.title).boldText()
+                            
+                        }
+                        if(filterTab == item) {
+                            Capsule().frame(height: 3)
+                                .foregroundColor(.blue)
+                                .matchedGeometryEffect(id: "filter", in: animation)
+                        } else {
+                            Capsule().frame(height: 3)
+                                .foregroundColor(.clear)
+                        }
+                    }
                 }
-              Spacer()
+                
             }
-        }.padding()
+            Divider().offset(y:-5)
+        }.padding(.vertical)
     }
 }
 

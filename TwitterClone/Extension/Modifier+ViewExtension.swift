@@ -28,6 +28,13 @@ struct BoldText : ViewModifier {
     }
 }
 
+struct GrayText : ViewModifier {
+    func body(content: Content) -> some View {
+        content.font(.headline)
+            .foregroundColor(.gray)
+    }
+}
+
 extension View {
     func textMeta() -> some View {
         modifier(MetaText())
@@ -39,6 +46,9 @@ extension View {
     
     func boldText() -> some View {
         modifier(BoldText())
+    }
+    func grayText() -> some View {
+        modifier(GrayText())
     }
 }
 

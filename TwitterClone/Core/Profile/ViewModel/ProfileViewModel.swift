@@ -17,7 +17,7 @@ enum ProfileFilter : Int, CaseIterable {
     var title : String {
         switch self {
         case .tweets: return "Tweets"
-        case .replies: return "Tweets & Replies"
+        case .replies: return "Replies"
         case .media: return "Media"
         case .likes: return "Likes"
         }

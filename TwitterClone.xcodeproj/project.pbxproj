@@ -21,6 +21,8 @@
 		04A15D52296C72DF008ED87D /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A15D51296C72DF008ED87D /* NotificationView.swift */; };
 		04A15D55296C72FC008ED87D /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A15D54296C72FC008ED87D /* MessageView.swift */; };
 		04A15D58296C7525008ED87D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A15D57296C7525008ED87D /* ProfileView.swift */; };
+		04AD0AC8296EF20C00118D50 /* ExploreGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AD0AC7296EF20C00118D50 /* ExploreGridItem.swift */; };
+		04AD0ACC296EF48F00118D50 /* ProfileFollowing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AD0ACB296EF48F00118D50 /* ProfileFollowing.swift */; };
 		04AD1197296C5DA200AECAFB /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AD1196296C5DA200AECAFB /* ViewModel.swift */; };
 		04AD119B296C5DF200AECAFB /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AD119A296C5DF200AECAFB /* FeedView.swift */; };
 		04AD119D296C628700AECAFB /* TweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AD119C296C628700AECAFB /* TweetView.swift */; };
@@ -62,6 +64,8 @@
 		04A15D51296C72DF008ED87D /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		04A15D54296C72FC008ED87D /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		04A15D57296C7525008ED87D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		04AD0AC7296EF20C00118D50 /* ExploreGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreGridItem.swift; sourceTree = "<group>"; };
+		04AD0ACB296EF48F00118D50 /* ProfileFollowing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFollowing.swift; sourceTree = "<group>"; };
 		04AD1196296C5DA200AECAFB /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		04AD119A296C5DF200AECAFB /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		04AD119C296C628700AECAFB /* TweetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetView.swift; sourceTree = "<group>"; };
@@ -208,7 +212,7 @@
 		04A15D4D296C7298008ED87D /* Explore */ = {
 			isa = PBXGroup;
 			children = (
-				04A15D4E296C72AF008ED87D /* ExploreView.swift */,
+				04AD0AC6296EEF5300118D50 /* View */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -232,10 +236,36 @@
 		04A15D56296C7506008ED87D /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				04A15D57296C7525008ED87D /* ProfileView.swift */,
-				0487958E296C7E5700D59F4C /* ProfileViewModel.swift */,
+				04AD0ACA296EF41600118D50 /* ViewModel */,
+				04AD0AC9296EF40800118D50 /* View */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		04AD0AC6296EEF5300118D50 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04A15D4E296C72AF008ED87D /* ExploreView.swift */,
+				04AD0AC7296EF20C00118D50 /* ExploreGridItem.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04AD0AC9296EF40800118D50 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04A15D57296C7525008ED87D /* ProfileView.swift */,
+				04AD0ACB296EF48F00118D50 /* ProfileFollowing.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04AD0ACA296EF41600118D50 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0487958E296C7E5700D59F4C /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		04AD1193296C5D6D00AECAFB /* Feeds */ = {
@@ -377,6 +407,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04AD0AC8296EF20C00118D50 /* ExploreGridItem.swift in Sources */,
 				04A15D48296C673C008ED87D /* Modifier+ViewExtension.swift in Sources */,
 				04AD119B296C5DF200AECAFB /* FeedView.swift in Sources */,
 				047BE07C296C5C30007FE2E4 /* ContentView.swift in Sources */,
@@ -387,6 +418,7 @@
 				04AD119D296C628700AECAFB /* TweetView.swift in Sources */,
 				04A15D4F296C72AF008ED87D /* ExploreView.swift in Sources */,
 				04AD1197296C5DA200AECAFB /* ViewModel.swift in Sources */,
+				04AD0ACC296EF48F00118D50 /* ProfileFollowing.swift in Sources */,
 				04A15D58296C7525008ED87D /* ProfileView.swift in Sources */,
 				04A15D52296C72DF008ED87D /* NotificationView.swift in Sources */,
 			);
