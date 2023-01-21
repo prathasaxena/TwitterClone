@@ -35,6 +35,35 @@ struct GrayText : ViewModifier {
     }
 }
 
+struct AuthRightLink : ViewModifier {
+    func body(content: Content) -> some View {
+       content
+            .font(.caption)
+            .fontWeight(.semibold)
+            .foregroundColor(Color(.systemBlue))
+    }
+}
+
+struct WideButton : ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.headline)
+            .fontWeight(.semibold)
+            .frame(width: 340, height: 50)
+            .background(Color(.systemBlue))
+            .foregroundColor(.white)
+            .clipShape(Capsule())
+            .padding()
+    }
+}
+
+struct ButtonShadow: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .shadow(color: Color.gray.opacity(0.5), radius: 10, x: 0, y: 0)
+    }
+}
+
 extension View {
     func textMeta() -> some View {
         modifier(MetaText())
@@ -49,6 +78,18 @@ extension View {
     }
     func grayText() -> some View {
         modifier(GrayText())
+    }
+    
+    func authRightLink() -> some View {
+        modifier(AuthRightLink())
+    }
+    
+    func wideBlueButton() -> some View {
+        modifier(WideButton())
+    }
+    
+    func buttonShadow() -> some View {
+        modifier(ButtonShadow())
     }
 }
 

@@ -10,14 +10,20 @@ import SwiftUI
 struct ProfileView: View {
     @State var filterTab : ProfileFilter = .tweets
     @Namespace var animation
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         VStack(alignment: .leading){
             ZStack(alignment: .bottomLeading) {
                 Color(.blue)
                     .frame(height: 200)
                     .ignoresSafeArea()
-                Image(systemName: "person")
-                    .offset(x: 15, y: -180)
+                Button {
+                    self.presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Image(systemName: "arrow.backward").foregroundColor(.black)
+                       
+                } .offset(x: 15,y:-180)
+            
                 Circle()
                     .frame(width: 100, height: 100)
                     .offset(x: 15)

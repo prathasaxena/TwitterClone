@@ -9,15 +9,18 @@ import SwiftUI
 
 struct ExploreGridItem: View {
     var body: some View {
-        HStack(spacing : 10) {
-            Circle()
-                .frame(width: 35, height: 35)
-            VStack(alignment: .leading) {
-                Text("Andrew").font(.subheadline).bold()
-                Text("andrewtate").font(.subheadline)
-            }
-            Spacer()
-        }.padding()
+        NavigationLink(destination: ProfileView()) {
+            HStack(spacing : 10) {
+                Circle()
+                    .frame(width: 35, height: 35)
+                    .foregroundColor(.black)
+                VStack(alignment: .leading) {
+                    Text("Andrew").font(.subheadline).bold()
+                    Text("andrewtate").font(.subheadline)
+                }.foregroundColor(.black)
+                Spacer()
+            }.padding()
+        }
     }
 }
 

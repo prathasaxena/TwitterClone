@@ -13,6 +13,7 @@ enum SideMenuAction: String, CaseIterable {
     case bookMarks
     case lists
     case circle
+    case logout
     
     var title : String {
         switch self {
@@ -21,6 +22,7 @@ enum SideMenuAction: String, CaseIterable {
         case .bookMarks: return "Bookmarks"
         case .lists: return "Lists"
         case .circle: return "Twitter Circle"
+        case .logout: return "Logout"
         }
     }
     
@@ -31,6 +33,7 @@ enum SideMenuAction: String, CaseIterable {
         case .bookMarks: return "bookmark"
         case .lists: return "list.bullet.rectangle.portrait"
         case .circle: return "person.wave.2"
+        case .logout: return "person.wave.2"
         }
     }
 }
