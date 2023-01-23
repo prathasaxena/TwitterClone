@@ -13,7 +13,7 @@ struct RegistrationView: View {
     @State var username : String = ""
     @State var fullName : String = ""
     @State var password: String = ""
-    
+    @EnvironmentObject var authViewModel : AuthViewModel
     var body: some View {
         VStack {
             AuthBgRect("Get Started.","Create your account")
@@ -28,7 +28,7 @@ struct RegistrationView: View {
     
             // sign up button
             Button {
-                
+                authViewModel.signUp(withEmail: email, password: password, username: username, fullName: fullName)
             } label: {
                 Text("Sign up")
                     .wideBlueButton()

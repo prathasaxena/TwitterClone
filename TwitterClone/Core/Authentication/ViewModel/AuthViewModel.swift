@@ -7,33 +7,36 @@
 
 import Foundation
 import SwiftUI
-import Firebase
+
 
 class AuthViewModel : ObservableObject {
-    @Published var urlSession : Firebase.User?
-    
+    @Published var urlSession : AuthController.FirebaseUser?
+    var authController : AuthController = AuthController()
     init() {
-        self.urlSession = Auth.auth().currentUser
+        self.urlSession = AuthController().currentUser
         print("DEBUG: urlSession value is \(urlSession?.uid) ")
     }
     
     func login(withEmail email : String, password: String) {
-        
-    }
-    
-    func signUp(withEmail email : String, password: String, username: String, fullName: String) async throws {
         do {
-            var createdUser = try await Auth.auth().sinupUser(withEmail: email, password: password)
-            guard let newUser = createdUser?.user else {
-                throw AuthError.sinupError
-            }
-            urlSession = newUser
-            let data = ["email" : email, "username": username, "fullName": fullName, "uId": newUser.uid]
-            try await Firestore.firestore().saveData(sendData: data, collectionName: "users", docName: newUser.uid)
+            
         } catch {
-            print("DEBUG: sign up failed")
+            
         }
     }
+    
+    func signUp(withEmail email : String, password: String, username: String, fullName: String) {
+        Task {
+            do {
+                try await authController.signUp(withEmail: email, password: password, username: username, fullName: fullName)
+            } catch {
+                print("Can't signup ")
+            }
+        }
+    }
+    
+    
+
 }
 
 enum AuthError : Error {
