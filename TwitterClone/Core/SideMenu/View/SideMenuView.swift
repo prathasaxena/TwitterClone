@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SideMenuView: View {
+    @EnvironmentObject var authVM : AuthViewModel
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 50) {
@@ -35,7 +36,9 @@ extension SideMenuView {
                     }
                 }else  if(item == .logout) {
                     NavigationLink(destination: Login()) {
-                        ActionButton(item: item)
+                        ActionButton(item: item).onTapGesture {
+                            authVM.logout()
+                        }
                     }
                 } else {
                     ActionButton(item: item)

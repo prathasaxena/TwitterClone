@@ -14,31 +14,54 @@ class AuthController {
     typealias FirebaseUser = Firebase.User
     var currentUser : FirebaseUser? = Auth.auth().currentUser
     
+    func signIn(withEmail email : String, password: String) async throws {
+        do {
+            let signedInUser = try await Auth.auth().loginUser(withEmail: email, password: password)
+            guard let newUser = signedInUser?.user else {
+                throw AuthError.signinError
+            }
+            currentUser = newUser
+        } catch {
+            print("DEBUG: sign ip failed")
+        }
+    }
     
     func signUp(withEmail email : String, password: String, username: String, fullName: String) async throws {
         do {
-            var createdUser = try await Auth.auth().sinupUser(withEmail: email, password: password)
+            let createdUser = try await Auth.auth().sinupUser(withEmail: email, password: password)
             guard let newUser = createdUser?.user else {
                 throw AuthError.sinupError
             }
             currentUser = newUser
-            let data = ["email" : email, "username": username, "fullName": fullName, "uId": newUser.uid]
+            let data = ["email" : email, "username": username.lowercased(), "fullName": fullName, "uId": newUser.uid]
             try await Firestore.firestore().saveData(sendData: data, collectionName: "users", docName: newUser.uid)
         } catch {
             print("DEBUG: sign up failed")
         }
+    }
+    
+    func signOut() throws {
+        do {
+            currentUser = nil
+            try Auth.auth().signOut()
+        } catch {
+            throw AuthError.signoutError
+        }
+       
     }
 }
 
 extension Auth {
      func sinupUser(withEmail email: String, password: String) async throws -> AuthDataResult? {
         do {
-            return try await withCheckedThrowingContinuation { continuation in
+             return try await withCheckedThrowingContinuation { continuation in
                 Auth.auth().createUser(withEmail: email, password: password) { result, error in
                     if let error = error {
                         continuation.resume(throwing: error)
+                        return
                     }
                     continuation.resume(returning: result)
+                    
                 }
             }
         } catch {
@@ -46,7 +69,22 @@ extension Auth {
         }
     }
     
-//    func loginUser
+    //    func loginUser
+    func loginUser(withEmail email: String, password: String) async throws -> AuthDataResult? {
+       do {
+           return try await withCheckedThrowingContinuation { continuation in
+               Auth.auth().signIn(withEmail: email, password: password) { result, error in
+                   if let error = error {
+                       continuation.resume(throwing: error)
+                       return
+                   }
+                   continuation.resume(returning: result)
+               }
+           }
+       } catch {
+           return nil
+       }
+   }
 }
 
 extension Firestore {

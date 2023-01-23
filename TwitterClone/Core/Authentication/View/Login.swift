@@ -10,6 +10,7 @@ import SwiftUI
 struct Login: View {
     @State var email = ""
     @State var password = ""
+    @EnvironmentObject var authVM : AuthViewModel
     var body: some View {
         VStack {
             AuthBgRect("Hello.","Welcome Back")
@@ -30,7 +31,7 @@ struct Login: View {
             }.padding()
             // sign up button
             Button {
-                
+                authVM.login(withEmail: email, password: password)
             } label: {
                 Text("Sign in")
                     .wideBlueButton()
