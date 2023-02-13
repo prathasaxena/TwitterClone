@@ -12,8 +12,11 @@ import SwiftUI
 class AuthViewModel : ObservableObject {
     var authController : AuthController = AuthController()
     @Published var urlSession : AuthController.FirebaseUser? = AuthController().currentUser
+    @Published var didUserAuthenticated = false
+ 
+    
     init() {
-        print("DEBUG: urlSession value is \(urlSession?.uid) ")
+        print("DEBUG: urlSession value is \(urlSession?.uid ?? "") ")
     }
     
      var getUrlSession : AuthController.FirebaseUser? {
@@ -35,9 +38,24 @@ class AuthViewModel : ObservableObject {
         Task {
             do {
                 try await authController.signUp(withEmail: email, password: password, username: username, fullName: fullName)
-                self.urlSession = authController.currentUser
+                self.didUserAuthenticated = true
             } catch {
                 print("Can't signup ")
+            }
+        }
+    }
+    
+    func uploadProfileImage(image: UIImage) {
+        UploadImageHelper.uploadImage(image: image) { imageUrl in
+            Task {
+                do {
+                    if let userUid = self.authController.tempUser?.uid {
+                        try await self.authController.updateProfile(userId: userUid, profileImageUrl: imageUrl)
+                        self.urlSession = self.authController.currentUser
+                    }
+                } catch {
+                    print("error in updating profile")
+                }
             }
         }
     }

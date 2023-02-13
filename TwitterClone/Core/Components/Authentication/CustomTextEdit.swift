@@ -10,12 +10,14 @@ import SwiftUI
 struct CustomTextEdit: View {
     var imageName : String
     var placeholder: String
+    var secure : Bool = false
     @Binding var value : String
     
-    init(imageName: String, placeholder : String, value: Binding<String>){
+    init(imageName: String, secure : Bool = false, placeholder : String, value: Binding<String>){
         self.imageName = imageName
         self.placeholder = placeholder
         self._value = value
+        self.secure = secure
     }
     var body: some View {
         VStack {
@@ -25,7 +27,11 @@ struct CustomTextEdit: View {
                     .scaledToFit()
                     .foregroundColor(Color(.darkGray))
                     .frame(width: 20, height: 20)
-                TextField(placeholder, text: $value)
+                if(secure){
+                    SecureField(placeholder, text: $value)
+                } else {
+                    TextField(placeholder, text: $value)
+                }
             }
             Divider().background(Color(.darkGray))
         }

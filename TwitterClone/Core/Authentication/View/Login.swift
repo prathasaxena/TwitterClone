@@ -17,7 +17,7 @@ struct Login: View {
             // text fields
             VStack(spacing: 40) {
                 CustomTextEdit(imageName: "envelope", placeholder: "Email", value: $email)
-                CustomTextEdit(imageName: "lock", placeholder: "Password", value: $password)
+                CustomTextEdit(imageName: "lock", secure: true, placeholder: "Password", value: $password)
             }
             .padding(.top, 40)
             .padding(.horizontal, 20)

@@ -7,13 +7,14 @@
 
 import Foundation
 import Firebase
+import FirebaseStorage
+
 
 class AuthController {
-//    init() {
-//    }
     typealias FirebaseUser = Firebase.User
     var currentUser : FirebaseUser? = Auth.auth().currentUser
-    
+    var tempUser : FirebaseUser? = Auth.auth().currentUser
+    static let COLLECTION_NAME = "users"
     func signIn(withEmail email : String, password: String) async throws {
         do {
             let signedInUser = try await Auth.auth().loginUser(withEmail: email, password: password)
@@ -32,17 +33,23 @@ class AuthController {
             guard let newUser = createdUser?.user else {
                 throw AuthError.sinupError
             }
-            currentUser = newUser
+            tempUser = newUser
             let data = ["email" : email, "username": username.lowercased(), "fullName": fullName, "uId": newUser.uid]
-            try await Firestore.firestore().saveData(sendData: data, collectionName: "users", docName: newUser.uid)
+            try await Firestore.firestore().saveData(sendData: data, collectionName: AuthController.COLLECTION_NAME, docName: newUser.uid)
         } catch {
             print("DEBUG: sign up failed")
         }
     }
     
+    func updateProfile(userId : String, profileImageUrl : String) async throws {
+        try await Firestore.firestore().updateData(cn: AuthController.COLLECTION_NAME, uid: userId, data: ["profileImageUrl": profileImageUrl])
+        currentUser = tempUser
+    }
+    
     func signOut() throws {
         do {
             currentUser = nil
+            tempUser = nil
             try Auth.auth().signOut()
         } catch {
             throw AuthError.signoutError
@@ -87,7 +94,7 @@ extension Auth {
    }
 }
 
-extension Firestore {
+extension  Firestore {
     func saveData(sendData data: [String: String],collectionName name : String, docName doc : String ) async throws {
         do {
                try await Firestore.firestore().collection(name).document(doc).setData(data) { error in
@@ -98,5 +105,9 @@ extension Firestore {
         } catch {
             
         }
+    }
+    
+    func updateData(cn collectionName : String, uid uid: String, data updatedObj: [String : String]) async throws {
+        try await Firestore.firestore().collection(collectionName).document(uid).updateData(updatedObj)
     }
 }

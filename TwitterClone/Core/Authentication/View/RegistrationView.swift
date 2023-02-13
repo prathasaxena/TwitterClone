@@ -15,13 +15,16 @@ struct RegistrationView: View {
     @State var password: String = ""
     @EnvironmentObject var authViewModel : AuthViewModel
     var body: some View {
+        NavigationLink(destination: UploadPicture(),
+                       isActive: $authViewModel.didUserAuthenticated,
+                       label: {})
         VStack {
             AuthBgRect("Get Started.","Create your account")
             VStack(spacing: 40) {
                 CustomTextEdit(imageName: "envelope", placeholder: "Email", value: $email)
                 CustomTextEdit(imageName: "person", placeholder: "Username", value: $username)
                 CustomTextEdit(imageName: "person", placeholder: "Full Name", value: $fullName)
-                CustomTextEdit(imageName: "lock", placeholder: "Password", value: $password)
+                CustomTextEdit(imageName: "lock", secure: true , placeholder: "Password", value: $password)
             }
             .padding(.vertical, 40)
             .padding(.horizontal, 20)
